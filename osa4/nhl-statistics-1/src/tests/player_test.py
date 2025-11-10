@@ -4,25 +4,21 @@ from player import Player
 
 
 class PlayerReaderStub:
-    """Testausta varten luotu stub-luokka, joka palauttaa kiinteän pelaajalistan."""
     def get_players(self):
         return [
-            Player("Semenko", "EDM", 4, 12),    # 16 pistettä
-            Player("Lemieux", "PIT", 45, 54),   # 99 pistettä
-            Player("Kurri", "EDM", 37, 53),     # 90 pistettä
-            Player("Yzerman", "DET", 42, 56),   # 98 pistettä
-            Player("Gretzky", "EDM", 35, 89)    # 124 pistettä
+            Player("Semenko", "EDM", 4, 12),
+            Player("Lemieux", "PIT", 45, 54),
+            Player("Kurri", "EDM", 37, 53),
+            Player("Yzerman", "DET", 42, 56),
+            Player("Gretzky", "EDM", 35, 89)
         ]
 
 
 class TestStatisticsService(unittest.TestCase):
-    """Yksikkötestit StatisticsService-luokalle."""
-
     def setUp(self):
-        """Luodaan StatisticsService-olio, jolle annetaan stub-luokka."""
         self.stats = StatisticsService(PlayerReaderStub())
 
-    # --- search-metodin testit ---
+    # search-metodin testit
 
     def test_search_returns_correct_player_when_found(self):
         """search palauttaa oikean pelaajan, jos nimi löytyy."""
@@ -37,7 +33,7 @@ class TestStatisticsService(unittest.TestCase):
         player = self.stats.search("Selänne")
         self.assertIsNone(player)
 
-    # --- team-metodin testit ---
+    # team-metodin testit
 
     def test_team_returns_all_players_from_team(self):
         """team palauttaa kaikki saman joukkueen pelaajat."""
@@ -51,7 +47,7 @@ class TestStatisticsService(unittest.TestCase):
         players = self.stats.team("XYZ")
         self.assertEqual(players, [])
 
-    # --- top-metodin testit ---
+    # top-metodin testit
 
     def test_top_returns_requested_number_of_players_plus_one(self):
         """top palauttaa how_many + 1 pelaajaa, koska i <= how_many."""
